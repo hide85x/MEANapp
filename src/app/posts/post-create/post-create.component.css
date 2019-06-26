@@ -1,0 +1,21 @@
+/* div {
+    display: flex;
+    flex-direction: column;
+    justify-content: center
+    
+}
+button{
+    background: dodgerblue;
+    margin: auto
+} */
+mat-card {
+    margin-top: 1rem;
+
+}
+textarea {
+
+    width:100%
+}
+mat-form-field {
+    width: 100%
+}
