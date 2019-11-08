@@ -1,15 +1,44 @@
+
+<!-- REACTIVE FORM APPROACH -->
 <mat-card>
-    <!-- [value]="newPost" #postInput -->
-    <mat-form-field>
-        <input matInput type="text" placeholder="title" [(ngModel)]="enteredTitle">
-    </mat-form-field>
-    
-    <mat-form-field>
-        <textarea matInput placeholder="content" [(ngModel)]='enteredContent' name="" id="" cols="30" rows="6">
-        </textarea>
-    </mat-form-field>
-    <button 
-    mat-raised-button 
-    (click)="onAddPost()"
-    color="accent">add post</button>
+    <mat-spinner *ngIf='isLoading'></mat-spinner>
+    <form [formGroup]="form" (submit)="onSavePost()"  *ngIf="!isLoading">
+        <mat-form-field>
+            <input 
+            matInput 
+            type="text" 
+            placeholder="title" 
+            formControlName="title"
+            >
+            <mat-error *ngIf="form.get('title').invalid" >Enter a post title! min 4 letters!</mat-error>
+
+        </mat-form-field>
+        
+        <mat-form-field>
+            <textarea 
+            matInput 
+            placeholder="content"
+            id="" cols="30" rows="6"
+            formControlName="content"
+            >
+            </textarea>
+            <mat-error *ngIf="form.get('content').invalid" >Enter a content of a post!</mat-error>
+
+        </mat-form-field>
+        <div class="image-preview" *ngIf="imagePreview !== '' && imagePreview &&form.get('image').valid ">
+            <img [src]="imagePreview" [alt]="form.value.title">
+        </div>
+        <div>
+            <button class="upload" type="button" mat-stroked-button (click)="filePicker.click()">image upload</button>
+            <input type="file" #filePicker (change)="onImagePicked($event)" >
+        </div>
+
+
+        <button 
+        type="submit"
+        mat-raised-button 
+        
+        color="accent">save post</button>
+
+    </form>
 </mat-card>

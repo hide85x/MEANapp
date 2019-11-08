@@ -19,3 +19,21 @@ textarea {
 mat-form-field {
     width: 100%
 }
+mat-spinner {
+    margin: auto;
+}
+.upload {
+    margin:0 auto 30px ;
+    border:2px solid rgba(0, 0, 0, 0.445)
+}
+input[type='file'] {
+    visibility: hidden;
+}
+.image-preview {
+    height: 15rem;
+    margin: 1rem 0
+}
+.image-preview img {
+    height: 100% 
+    /* to daje nam wielkosc 100% swojego rodzica czyli 5rem */
+}

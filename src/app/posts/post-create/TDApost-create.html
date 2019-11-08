@@ -1,0 +1,56 @@
+
+<!-- TEMPLATE DRIVEN APPROACH -->
+<mat-card>
+    <mat-spinner *ngIf='isLoading'></mat-spinner>
+    <form (submit)="onSavePost(postForm)" #postForm="ngForm" *ngIf="!isLoading">
+        <!--ngForm daje nam konttorle nad calym form
+             musimy podac #postForm... zey obsluzyc form jakim posluguje sie angular -->
+        <!-- on submit uruchom onAddPost-->
+        <mat-form-field>
+            <input 
+            matInput 
+            type="text" 
+            name="title"
+            placeholder="title" 
+            [ngModel]= "post?.title"
+            required
+            minlength="4"
+            #title="ngModel">
+            <!--   #title="ngModel" daje nam dostep do danych z inputu, ktore przekazujemy nizej
+            do mat-errora -->
+            <mat-error *ngIf="title.invalid" >Enter a post title! min 4 letters!</mat-error>
+
+            <!--[(ngModel)]="enteredTitle" zamiast two way bindning uzywamy ngModel
+            sam nam laczy inputy z naszym formem  -->
+        </mat-form-field>
+        
+        <!--  zastepujemy ngModel [ngModel] -->
+        <!-- pierdolony ?post.title/content w [ngModel], dzieki "?" angular sprawdza czy ma dostep do jebanego posta zanim zczyta jego propsy -->
+        <mat-form-field>
+            <textarea 
+            matInput 
+            placeholder="content"
+            [ngModel]="post?.content" 
+            required
+            name="content" id="" cols="30" rows="6"
+            #content="ngModel">
+            </textarea>
+            <mat-error *ngIf="content.invalid" >Enter a content of a post!</mat-error>
+
+        </mat-form-field>
+        <div>
+            <!--  -->
+            <button class="upload" type="button" mat-stroked-button (click)="filePicker.click()">image upload</button>
+            <input type="file" #filePicker>
+            
+        </div>
+
+        <button 
+        type="submit"
+        mat-raised-button 
+        
+        color="accent">save post</button>
+        <!-- (click)="onAddPost()" -->
+
+    </form>
+</mat-card>

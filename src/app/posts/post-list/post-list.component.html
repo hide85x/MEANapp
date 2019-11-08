@@ -1,9 +1,24 @@
-<mat-accordion multi="true" *ngIf="posts.length > 0">
+<mat-spinner *ngIf='isLoading'></mat-spinner>
+<mat-accordion multi="true" *ngIf='posts.length > 0 && !isLoading'>
     <mat-expansion-panel *ngFor="let post of posts">
         <mat-expansion-panel-header>
-            <h4> {{post.title}} </h4>
+
+            <h4>{{post.title}} </h4>
         </mat-expansion-panel-header>
-        <p>content : {{post.content}}</p>
+        <p>{{post.content}}</p>
+        <p>{{post.creator}}</p>
+        <div class="post-image">
+            <img [src]="post.imagePath" alt="">
+        </div>
+        <mat-action-row *ngIf="userIsAuth && userId == post.creator" >
+            <a color="accent" [routerLink]="['/edit', post.id]" mat-raised-button mat-button>EDIT</a>
+            <button color="warn" mat-raised-button mat-button (click)="onDelete(post.id)">DELETE</button>
+        </mat-action-row>
     </mat-expansion-panel>
 </mat-accordion>
-<p class="info-text mat-body-1" *ngIf="posts.length <= 0">No posts so far</p>
+<mat-paginator *ngIf='posts.length > 0' [length]="totalPosts" [pageSize]="postsPerPage"
+    [pageSizeOptions]="pageSizeOptions" (page)="onChangePage($event)"></mat-paginator>
+<p class="info-text mat-body-1" *ngIf="posts.length<=0 && !isLoading">No posts so far</p>
+<!-- jesli jestesmy na ostatniej page i pokazjuemy jeden post na strone, to kasujac jednego z ostatniej strony dostaniemy
+No POSTS SO FAR, czyli pokazuje nam info o postach z TEJ page tylko
+-->

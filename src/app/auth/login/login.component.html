@@ -1,0 +1,20 @@
+<!-- REACTIVE FORM APPROACH -->
+<mat-card>
+    <mat-spinner *ngIf='isLoading'></mat-spinner>
+    <form (submit)="onLogin(loginForm)" #loginForm="ngForm" *ngIf="!isLoading">
+        <mat-form-field>
+            <input name="email" #emailInput="ngModel" ngModel matInput type="email" placeholder="Email adress" required email>
+            <mat-error *ngIf="emailInput.invalid">Enter a valid email</mat-error>
+
+        </mat-form-field>
+
+        <mat-form-field>
+            <input name="password" #passwordInput="ngModel" ngModel type="password" matInput placeholder="Password" required minlength="4">
+            <mat-error *ngIf="passwordInput.invalid">Enter a valid password(min 4 characters)</mat-error>
+
+        </mat-form-field>
+
+        <button *ngIf="!isLoading" type="submit" mat-raised-button color="accent">Login</button>
+        <!-- <mat-spinner *ngIf="isLoading"></mat-spinner> -->
+    </form>
+</mat-card>

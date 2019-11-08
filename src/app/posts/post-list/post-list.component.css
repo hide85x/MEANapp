@@ -5,3 +5,18 @@
 .info-text {
     text-align: center
 }
+mat-spinner {
+    margin: auto
+}
+.post-image {
+    height: 25rem;
+    margin: 1rem 0
+}
+.post-image img {
+    height: 100% 
+    /* to daje nam wielkosc 100% swojego rodzica czyli 5rem */
+}
+mat-paginator {
+    margin-top: 1rem 
+    /* 16px = 1rem */
+}
